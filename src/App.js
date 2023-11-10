@@ -1,11 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
 import "./App.css";
+import { useEffect } from "react";
+
+import { getGifs } from "./actions";
+
 import GifList from "./components/GifList";
 import GifForm from "./components/GifForm";
 
 function App(props) {
-  const { loading, error } = props;
+  const { loading, error, getGifs } = props;
+
+  useEffect(() => {
+    getGifs('cats');
+  }, []);
 
   return (
     <div className="App">
@@ -29,4 +37,4 @@ const MapStateToProps = state => {
   }
 }
 
-export default connect(MapStateToProps)(App);
+export default connect(MapStateToProps, { getGifs })(App);
